@@ -1,0 +1,48 @@
+<% include ../partials/header %>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <p class="lead">RECIPE WORLD</p>
+           </div>
+        <div class="col-md-9">
+            <div class="thumbnail">
+                <img class="img-responsive" src="<%= blog.image %>">
+                <div class="caption-full">
+                    <h4><a><%= blog.name %></a></h4>
+                    <p>Description: <%= blog.description %></p>
+                    <p>Ingredients: <%= blog.ingredients %></p>
+                    <p>Procedure: <%= blog.procedure %></p>
+                    <p>Additional Tips: <%= blog.additionalTips %></p>
+                </div>
+            </div>
+            <div class="well">
+                <div class="text-right">
+                    <a class="btn btn-success" href="/blogs/<%= blog._id %>/comments/new">Add new comment</a>
+                </div>
+                <hr>
+            </div>
+            <a href="/blogs/<%=blog._id%>/edit" class="ui orange basic button">Update Recipe</a>
+            <form style="display: inline" method="POST" action="/blogs/<%=blog._id%>?_method=DELETE">
+                <button class="ui red basic button" type="submit">Delete Recipe</button>
+            </form>
+            <hr>
+
+                  <% blog.comments.forEach(function(comment){ %>
+                   <div class="row">
+                       <div class="col-md-12">
+                           <strong><%= comment.author %></strong> 
+                            <p>
+                                    <%= comment.text %>
+                           </p>
+                                
+                       </div>
+                   </div>
+                  <% }) %>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<% include ../partials/footer %>
